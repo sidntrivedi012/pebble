@@ -76,10 +76,12 @@ func (w *blockWriter) clear() {
 // MaximumBlockSize is an extremely generous maximum block size of 256MiB. We
 // explicitly place this limit to reserve a few bits in the restart for
 // internal use.
-const MaximumBlockSize = 1 << 28
-const setHasSameKeyPrefixRestartMask uint32 = 1 << 31
-const restartMaskLittleEndianHighByteWithoutSetHasSamePrefix byte = 0b0111_1111
-const restartMaskLittleEndianHighByteOnlySetHasSamePrefix byte = 0b1000_0000
+const (
+	MaximumBlockSize                                              = 1 << 28
+	setHasSameKeyPrefixRestartMask                         uint32 = 1 << 31
+	restartMaskLittleEndianHighByteWithoutSetHasSamePrefix byte   = 0b0111_1111
+	restartMaskLittleEndianHighByteOnlySetHasSamePrefix    byte   = 0b1000_0000
+)
 
 func (w *blockWriter) getCurKey() InternalKey {
 	k := base.DecodeInternalKey(w.curKey)
@@ -637,8 +639,10 @@ func (i *blockIter) readFirstKey() error {
 
 // The sstable internal obsolete bit is set when writing a block and unset by
 // blockIter, so no code outside block writing/reading code ever sees it.
-const trailerObsoleteBit = uint64(base.InternalKeyKindSSTableInternalObsoleteBit)
-const trailerObsoleteMask = (InternalKeySeqNumMax << 8) | uint64(base.InternalKeyKindSSTableInternalObsoleteMask)
+const (
+	trailerObsoleteBit  = uint64(base.InternalKeyKindSSTableInternalObsoleteBit)
+	trailerObsoleteMask = (InternalKeySeqNumMax << 8) | uint64(base.InternalKeyKindSSTableInternalObsoleteMask)
+)
 
 func (i *blockIter) decodeInternalKey(key []byte) (hiddenPoint bool) {
 	// Manually inlining base.DecodeInternalKey provides a 5-10% speedup on

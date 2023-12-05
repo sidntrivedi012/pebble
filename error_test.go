@@ -303,7 +303,6 @@ func TestCorruptReadError(t *testing.T) {
 6:
   000005:[a1#10,SET-a2#11,SET]
 `, d, t)
-
 		} else {
 			expectLSM(`
 0.0:

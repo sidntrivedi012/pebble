@@ -37,6 +37,7 @@ func testWriterParallelism(t *testing.T, parallelism bool) {
 		t.Run(format.String(), func(t *testing.T) { runDataDriven(t, tdFile, format, parallelism) })
 	}
 }
+
 func TestWriter(t *testing.T) {
 	testWriterParallelism(t, false)
 }
@@ -255,7 +256,8 @@ func TestWriterWithValueBlocks(t *testing.T) {
 	}
 	t.Logf("writer parallelism %t", parallelism)
 	attributeExtractor := func(
-		key []byte, keyPrefixLen int, value []byte) (base.ShortAttribute, error) {
+		key []byte, keyPrefixLen int, value []byte,
+	) (base.ShortAttribute, error) {
 		require.NotNil(t, key)
 		require.Less(t, 0, keyPrefixLen)
 		attribute := base.ShortAttribute(len(value) & '\x07')

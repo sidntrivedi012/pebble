@@ -394,9 +394,7 @@ func TestDiskHealthChecking_File_Underflow(t *testing.T) {
 	})
 }
 
-var (
-	errInjected = errors.New("injected error")
-)
+var errInjected = errors.New("injected error")
 
 // filesystemOpsMockFS returns a filesystem that will block until it reads from
 // the provided channel on filesystem operations.

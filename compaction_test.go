@@ -2321,7 +2321,6 @@ func closeAllSnapshots(d *DB) error {
 }
 
 func TestCompactionReadTriggeredQueue(t *testing.T) {
-
 	// Convert a read compaction to a string which this test
 	// understands.
 	showRC := func(rc *readCompaction) string {
@@ -3314,8 +3313,7 @@ func TestAdjustGrandparentOverlapBytesForFlush(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		m := &manifest.FileMetadata{Size: lbaseSize, FileNum: FileNum(i)}
 		m.InitPhysicalBacking()
-		lbaseFiles =
-			append(lbaseFiles, m)
+		lbaseFiles = append(lbaseFiles, m)
 	}
 	const maxOutputFileSize = 2 << 20
 	// 20MB max overlap, so flush split into 25 files.
@@ -3736,7 +3734,7 @@ var _ errorfs.Injector = &createManifestErrorInjector{}
 // Regression test for #1669.
 func TestCompaction_LogAndApplyFails(t *testing.T) {
 	// flushKeys writes the given keys to the DB, flushing the resulting memtable.
-	var key = []byte("foo")
+	key := []byte("foo")
 	flushErrC := make(chan error)
 	flushKeys := func(db *DB) error {
 		b := db.NewBatch()

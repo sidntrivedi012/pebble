@@ -505,8 +505,10 @@ type DB struct {
 	openedAt time.Time
 }
 
-var _ Reader = (*DB)(nil)
-var _ Writer = (*DB)(nil)
+var (
+	_ Reader = (*DB)(nil)
+	_ Writer = (*DB)(nil)
+)
 
 // TestOnlyWaitForCleaning MUST only be used in tests.
 func (d *DB) TestOnlyWaitForCleaning() {
@@ -2919,7 +2921,6 @@ func (d *DB) ScanStatistics(
 	defer iter.close()
 
 	err := scanInternalImpl(ctx, lower, upper, iter, scanInternalOpts)
-
 	if err != nil {
 		return LSMKeyStatistics{}, err
 	}

@@ -563,8 +563,7 @@ func BenchmarkLevelIterSeqSeekGEWithBounds(b *testing.B) {
 				for _, count := range []int{5} {
 					b.Run(fmt.Sprintf("count=%d", count),
 						func(b *testing.B) {
-							readers, metas, keys, cleanup :=
-								buildLevelIterTables(b, blockSize, restartInterval, count)
+							readers, metas, keys, cleanup := buildLevelIterTables(b, blockSize, restartInterval, count)
 							defer cleanup()
 							// This newIters is cheaper than in practice since it does not do
 							// tableCacheShard.findNode.
@@ -605,8 +604,7 @@ func BenchmarkLevelIterSeqSeekGEWithBounds(b *testing.B) {
 func BenchmarkLevelIterSeqSeekPrefixGE(b *testing.B) {
 	const blockSize = 32 << 10
 	const restartInterval = 16
-	readers, metas, keys, cleanup :=
-		buildLevelIterTables(b, blockSize, restartInterval, 5)
+	readers, metas, keys, cleanup := buildLevelIterTables(b, blockSize, restartInterval, 5)
 	defer cleanup()
 	// This newIters is cheaper than in practice since it does not do
 	// tableCacheShard.findNode.

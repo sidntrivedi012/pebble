@@ -404,8 +404,7 @@ func (i *twoLevelIterator) SeekPrefixGE(
 	// The twoLevelIterator could be already exhausted. Utilize that when
 	// trySeekUsingNext is true. See the comment about data-exhausted, PGDE, and
 	// bounds-exhausted near the top of the file.
-	filterUsedAndDidNotMatch :=
-		i.reader.tableFilter != nil && i.useFilter && !i.lastBloomFilterMatched
+	filterUsedAndDidNotMatch := i.reader.tableFilter != nil && i.useFilter && !i.lastBloomFilterMatched
 	if flags.TrySeekUsingNext() && !filterUsedAndDidNotMatch &&
 		(i.exhaustedBounds == +1 || (i.data.isDataInvalidated() && i.index.isDataInvalidated())) &&
 		err == nil {

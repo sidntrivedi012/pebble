@@ -811,8 +811,7 @@ func runTestReader(t *testing.T, o WriterOptions, dir string, r *Reader, printVa
 				var filterer *BlockPropertiesFilterer
 				if len(bpfs) > 0 {
 					filterer = newBlockPropertiesFilterer(bpfs, nil)
-					intersects, err :=
-						filterer.intersectsUserPropsAndFinishInit(r.Properties.UserProperties)
+					intersects, err := filterer.intersectsUserPropsAndFinishInit(r.Properties.UserProperties)
 					if err != nil {
 						return err.Error()
 					}
@@ -948,6 +947,7 @@ func TestReaderCheckComparerMerger(t *testing.T) {
 		})
 	}
 }
+
 func checkValidPrefix(prefix, key []byte) bool {
 	return prefix == nil || bytes.HasPrefix(key, prefix)
 }
@@ -2059,8 +2059,7 @@ func BenchmarkIteratorScanObsolete(b *testing.B) {
 								if format == TableFormatPebblev4 && hideObsoletePoints {
 									filterer = newBlockPropertiesFilterer(
 										[]BlockPropertyFilter{obsoleteKeyBlockPropertyFilter{}}, nil)
-									intersects, err :=
-										filterer.intersectsUserPropsAndFinishInit(r.Properties.UserProperties)
+									intersects, err := filterer.intersectsUserPropsAndFinishInit(r.Properties.UserProperties)
 									if err != nil {
 										b.Fatalf("%s", err.Error())
 									}

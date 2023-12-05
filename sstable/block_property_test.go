@@ -1345,8 +1345,10 @@ type keyCountCollector struct {
 	block, index, table int
 }
 
-var _ BlockPropertyCollector = &keyCountCollector{}
-var _ SuffixReplaceableBlockCollector = &keyCountCollector{}
+var (
+	_ BlockPropertyCollector          = &keyCountCollector{}
+	_ SuffixReplaceableBlockCollector = &keyCountCollector{}
+)
 
 func keyCountCollectorFn(name string) func() BlockPropertyCollector {
 	return func() BlockPropertyCollector { return &keyCountCollector{name: name} }
@@ -1424,8 +1426,10 @@ type intSuffixTablePropCollector struct {
 	intSuffixCollector
 }
 
-var _ TablePropertyCollector = &intSuffixTablePropCollector{}
-var _ SuffixReplaceableTableCollector = &intSuffixTablePropCollector{}
+var (
+	_ TablePropertyCollector          = &intSuffixTablePropCollector{}
+	_ SuffixReplaceableTableCollector = &intSuffixTablePropCollector{}
+)
 
 func intSuffixTablePropCollectorFn(name string, len int) func() TablePropertyCollector {
 	return func() TablePropertyCollector { return &intSuffixTablePropCollector{name, makeIntSuffixCollector(len)} }
@@ -1474,8 +1478,10 @@ func intSuffixIntervalCollectorFn(name string, length int) func() BlockPropertyC
 	}
 }
 
-var _ DataBlockIntervalCollector = &intSuffixIntervalCollector{}
-var _ SuffixReplaceableBlockCollector = &intSuffixIntervalCollector{}
+var (
+	_ DataBlockIntervalCollector      = &intSuffixIntervalCollector{}
+	_ SuffixReplaceableBlockCollector = &intSuffixIntervalCollector{}
+)
 
 func (p *intSuffixIntervalCollector) FinishDataBlock() (lower uint64, upper uint64, err error) {
 	return p.min, p.max + 1, nil

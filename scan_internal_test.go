@@ -144,7 +144,7 @@ func TestScanStatistics(t *testing.T) {
 			var lower, upper []byte
 			var reader scanInternalReader = d
 			var b strings.Builder
-			var showSnapshotPinned = false
+			showSnapshotPinned := false
 			var keyKindsToDisplay []InternalKeyKind
 			var showLevels []string
 

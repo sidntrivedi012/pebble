@@ -358,8 +358,10 @@ type BatchCommitStats struct {
 	CommitWaitDuration time.Duration
 }
 
-var _ Reader = (*Batch)(nil)
-var _ Writer = (*Batch)(nil)
+var (
+	_ Reader = (*Batch)(nil)
+	_ Writer = (*Batch)(nil)
+)
 
 var batchPool = sync.Pool{
 	New: func() interface{} {

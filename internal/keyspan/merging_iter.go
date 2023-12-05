@@ -447,7 +447,6 @@ func (m *MergingIter) SeekGE(key []byte) *Span {
 		return s
 	}
 	return m.findNextFragmentSet()
-
 }
 
 // SeekLT moves the iterator to the last span covering a key less than the

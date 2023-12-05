@@ -314,6 +314,7 @@ func (v *tombstonesByStartKeyAndSeqnum) Less(i, j int) bool {
 	}
 	return less < 0
 }
+
 func (v *tombstonesByStartKeyAndSeqnum) Swap(i, j int) {
 	v.buf[i], v.buf[j] = v.buf[j], v.buf[i]
 }
@@ -503,9 +504,11 @@ func (v *userKeysSort) Len() int { return len(v.buf) }
 func (v *userKeysSort) Less(i, j int) bool {
 	return v.cmp(v.buf[i], v.buf[j]) < 0
 }
+
 func (v *userKeysSort) Swap(i, j int) {
 	v.buf[i], v.buf[j] = v.buf[j], v.buf[i]
 }
+
 func collectAllUserKeys(cmp Compare, tombstones []tombstoneWithLevel) [][]byte {
 	keys := make([][]byte, 0, len(tombstones)*2)
 	for _, t := range tombstones {

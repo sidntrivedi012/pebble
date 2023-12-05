@@ -249,7 +249,6 @@ func createBench(benchName string, benchDescription string) fsBenchmark {
 func deleteBench(
 	benchName string, benchDescription string, preNumFiles int, preFileSize int64, fileSize int64,
 ) fsBenchmark {
-
 	createBench := func(dirpath string) *fsBench {
 		bench := &fsBench{}
 		mkDir(dirpath)
@@ -384,7 +383,6 @@ func deleteUniformBench(
 func writeSyncBench(
 	benchName string, benchDescription string, maxFileSize int64, writeSize int64,
 ) fsBenchmark {
-
 	if writeSize > maxFileSize {
 		log.Fatalln("File write threshold is greater than max file size.")
 	}
@@ -457,7 +455,6 @@ func writeSyncBench(
 func diskUsageBench(
 	benchName string, benchDescription string, maxFileSize int64, writeSize int64,
 ) fsBenchmark {
-
 	if writeSize > maxFileSize {
 		log.Fatalln("File write threshold is greater than max file size.")
 	}

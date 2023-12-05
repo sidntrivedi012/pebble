@@ -26,8 +26,10 @@ import (
 	"github.com/cockroachdb/pebble/sstable"
 )
 
-var emptyIter = &errorIter{err: nil}
-var emptyKeyspanIter = &errorKeyspanIter{err: nil}
+var (
+	emptyIter        = &errorIter{err: nil}
+	emptyKeyspanIter = &errorKeyspanIter{err: nil}
+)
 
 // filteredAll is a singleton internalIterator implementation used when an
 // sstable does contain point keys, but all the keys are filtered by the active
@@ -440,9 +442,8 @@ func (c *tableCacheShard) newIters(
 		//
 		// An alternative would be to have different slices for different sstable
 		// iterators, but that requires more work to avoid allocations.
-		hideObsoletePoints, pointKeyFilters =
-			v.reader.TryAddBlockPropertyFilterForHideObsoletePoints(
-				opts.snapshotForHideObsoletePoints, file.LargestSeqNum, opts.PointKeyFilters)
+		hideObsoletePoints, pointKeyFilters = v.reader.TryAddBlockPropertyFilterForHideObsoletePoints(
+			opts.snapshotForHideObsoletePoints, file.LargestSeqNum, opts.PointKeyFilters)
 	}
 	ok := true
 	var filterer *sstable.BlockPropertiesFilterer

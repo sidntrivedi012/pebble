@@ -138,6 +138,7 @@ func (cl sublevelInfo) Clone() sublevelInfo {
 		LevelSlice: cl.LevelSlice.Reslice(func(start, end *manifest.LevelIterator) {}),
 	}
 }
+
 func (cl sublevelInfo) String() string {
 	return fmt.Sprintf(`Sublevel %s; Levels %s`, cl.sublevel, cl.LevelSlice)
 }
@@ -322,7 +323,6 @@ func (pc *pickedCompaction) String() string {
 
 // Clone creates a deep copy of the pickedCompaction
 func (pc *pickedCompaction) clone() *pickedCompaction {
-
 	// Quickly copy over fields that do not require special deep copy care, and
 	// set all fields that will require a deep copy to nil.
 	newPC := &pickedCompaction{
@@ -734,8 +734,7 @@ func compensatedSize(f *fileMetadata) uint64 {
 // a *uint64. Compensated sizes may change once a table's stats are loaded
 // asynchronously, so its values are marked as cacheable only if a file's
 // stats have been loaded.
-type compensatedSizeAnnotator struct {
-}
+type compensatedSizeAnnotator struct{}
 
 var _ manifest.Annotator = compensatedSizeAnnotator{}
 
@@ -1427,7 +1426,6 @@ func (p *compactionPickerByScore) pickAuto(env compactionEnv) (pc *pickedCompact
 func (p *compactionPickerByScore) addScoresToPickedCompactionMetrics(
 	pc *pickedCompaction, candInfo [numLevels]candidateLevelInfo,
 ) {
-
 	// candInfo is sorted by score, not by compaction level.
 	infoByLevel := [numLevels]candidateLevelInfo{}
 	for i := range candInfo {

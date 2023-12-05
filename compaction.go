@@ -39,9 +39,11 @@ var errEmptyTable = errors.New("pebble: empty table")
 // concurrent excise or ingest-split operation.
 var ErrCancelledCompaction = errors.New("pebble: compaction cancelled by a concurrent operation, will retry compaction")
 
-var compactLabels = pprof.Labels("pebble", "compact")
-var flushLabels = pprof.Labels("pebble", "flush")
-var gcLabels = pprof.Labels("pebble", "gc")
+var (
+	compactLabels = pprof.Labels("pebble", "compact")
+	flushLabels   = pprof.Labels("pebble", "flush")
+	gcLabels      = pprof.Labels("pebble", "gc")
+)
 
 // getInternalWriterProperties accesses a private variable (in the
 // internal/private package) initialized by the sstable Writer. This indirection
@@ -107,6 +109,7 @@ func (cl compactionLevel) Clone() compactionLevel {
 	}
 	return newCL
 }
+
 func (cl compactionLevel) String() string {
 	return fmt.Sprintf(`Level %d, Files %s`, cl.level, cl.files)
 }
@@ -861,16 +864,14 @@ func adjustGrandparentOverlapBytesForFlush(c *compaction, flushingBytes uint64) 
 	// the compression ratio.
 	const approxCompressionRatio = 0.2
 	approxOutputBytes := approxCompressionRatio * float64(flushingBytes)
-	approxNumFilesBasedOnTargetSize :=
-		int(math.Ceil(approxOutputBytes / float64(c.maxOutputFileSize)))
+	approxNumFilesBasedOnTargetSize := int(math.Ceil(approxOutputBytes / float64(c.maxOutputFileSize)))
 	acceptableFileCount := float64(4 * approxNumFilesBasedOnTargetSize)
 	// The byte calculation is linear in numGrandparentFiles, but we will
 	// incur this linear cost in findGrandparentLimit too, so we are also
 	// willing to pay it now. We could approximate this cheaply by using
 	// the mean file size of Lbase.
 	grandparentFileBytes := c.grandparents.SizeSum()
-	fileCountUpperBoundDueToGrandparents :=
-		float64(grandparentFileBytes) / float64(c.maxOverlapBytes)
+	fileCountUpperBoundDueToGrandparents := float64(grandparentFileBytes) / float64(c.maxOverlapBytes)
 	if fileCountUpperBoundDueToGrandparents > acceptableFileCount {
 		c.maxOverlapBytes = uint64(
 			float64(c.maxOverlapBytes) *
@@ -3148,9 +3149,8 @@ func (d *DB) runCompaction(
 		cpuWorkHandle = d.opts.Experimental.CPUWorkPermissionGranter.GetPermission(
 			MaxFileWriteAdditionalCPUTime,
 		)
-		writerOpts.Parallelism =
-			d.opts.Experimental.MaxWriterConcurrency > 0 &&
-				(cpuWorkHandle.Permitted() || d.opts.Experimental.ForceWriterParallelism)
+		writerOpts.Parallelism = d.opts.Experimental.MaxWriterConcurrency > 0 &&
+			(cpuWorkHandle.Permitted() || d.opts.Experimental.ForceWriterParallelism)
 
 		tw = sstable.NewWriter(writable, writerOpts, cacheOpts, &prevPointKey)
 

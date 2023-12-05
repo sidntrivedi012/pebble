@@ -167,7 +167,6 @@ func (s *sstableT) runCheck(cmd *cobra.Command, args []string) {
 		fmt.Fprintf(stdout, "%s\n", arg)
 
 		r, err := s.newReader(f)
-
 		if err != nil {
 			fmt.Fprintf(stdout, "%s\n", err)
 			return

@@ -128,9 +128,7 @@ type Skiplist struct {
 	rand           rand.PCGSource
 }
 
-var (
-	probabilities [maxHeight]uint32
-)
+var probabilities [maxHeight]uint32
 
 func init() {
 	const pValue = 1 / math.E

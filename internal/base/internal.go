@@ -31,9 +31,9 @@ const (
 	InternalKeyKindSet     InternalKeyKind = 1
 	InternalKeyKindMerge   InternalKeyKind = 2
 	InternalKeyKindLogData InternalKeyKind = 3
-	//InternalKeyKindColumnFamilyDeletion     InternalKeyKind = 4
-	//InternalKeyKindColumnFamilyValue        InternalKeyKind = 5
-	//InternalKeyKindColumnFamilyMerge        InternalKeyKind = 6
+	// InternalKeyKindColumnFamilyDeletion     InternalKeyKind = 4
+	// InternalKeyKindColumnFamilyValue        InternalKeyKind = 5
+	// InternalKeyKindColumnFamilyMerge        InternalKeyKind = 6
 
 	// InternalKeyKindSingleDelete (SINGLEDEL) is a performance optimization
 	// solely for compactions (to reduce write amp and space amp). Readers other
@@ -43,16 +43,16 @@ const (
 	// InternalKeyKindSSTableInternalObsoleteBit, this is also necessary for
 	// correctness.
 	InternalKeyKindSingleDelete InternalKeyKind = 7
-	//InternalKeyKindColumnFamilySingleDelete InternalKeyKind = 8
-	//InternalKeyKindBeginPrepareXID          InternalKeyKind = 9
-	//InternalKeyKindEndPrepareXID            InternalKeyKind = 10
-	//InternalKeyKindCommitXID                InternalKeyKind = 11
-	//InternalKeyKindRollbackXID              InternalKeyKind = 12
-	//InternalKeyKindNoop                     InternalKeyKind = 13
-	//InternalKeyKindColumnFamilyRangeDelete  InternalKeyKind = 14
+	// InternalKeyKindColumnFamilySingleDelete InternalKeyKind = 8
+	// InternalKeyKindBeginPrepareXID          InternalKeyKind = 9
+	// InternalKeyKindEndPrepareXID            InternalKeyKind = 10
+	// InternalKeyKindCommitXID                InternalKeyKind = 11
+	// InternalKeyKindRollbackXID              InternalKeyKind = 12
+	// InternalKeyKindNoop                     InternalKeyKind = 13
+	// InternalKeyKindColumnFamilyRangeDelete  InternalKeyKind = 14
 	InternalKeyKindRangeDelete InternalKeyKind = 15
-	//InternalKeyKindColumnFamilyBlobIndex    InternalKeyKind = 16
-	//InternalKeyKindBlobIndex                InternalKeyKind = 17
+	// InternalKeyKindColumnFamilyBlobIndex    InternalKeyKind = 16
+	// InternalKeyKindBlobIndex                InternalKeyKind = 17
 
 	// InternalKeyKindSeparator is a key used for separator / successor keys
 	// written to sstable block indexes.

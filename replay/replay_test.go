@@ -558,7 +558,7 @@ func buildHeavyWorkload(t *testing.T) vfs.FS {
 	wc.Start(destFS, "workload")
 
 	ks := testkeys.Alpha(5)
-	var bufKey = make([]byte, ks.MaxLen())
+	bufKey := make([]byte, ks.MaxLen())
 	var bufVal [512]byte
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := 0; i < 100; i++ {

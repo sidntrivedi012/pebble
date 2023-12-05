@@ -882,7 +882,8 @@ func TestIteratorSeekOpt(t *testing.T) {
 			oldNewIters := d.newIters
 			d.newIters = func(
 				ctx context.Context, file *manifest.FileMetadata, opts *IterOptions,
-				internalOpts internalIterOpts) (internalIterator, keyspan.FragmentIterator, error) {
+				internalOpts internalIterOpts,
+			) (internalIterator, keyspan.FragmentIterator, error) {
 				iter, rangeIter, err := oldNewIters(ctx, file, opts, internalOpts)
 				iterWrapped := &iterSeekOptWrapper{
 					internalIterator:      iter,
@@ -1225,8 +1226,7 @@ func TestIteratorBlockIntervalFilter(t *testing.T) {
 					}
 				}
 				rand.Shuffle(len(opts.PointKeyFilters), func(i, j int) {
-					opts.PointKeyFilters[i], opts.PointKeyFilters[j] =
-						opts.PointKeyFilters[j], opts.PointKeyFilters[i]
+					opts.PointKeyFilters[i], opts.PointKeyFilters[j] = opts.PointKeyFilters[j], opts.PointKeyFilters[i]
 				})
 				iter, _ := d.NewIter(&opts)
 				return runIterCmd(td, iter, true)
@@ -1906,7 +1906,8 @@ func setupForTwoLevelBloomTombstone(b *testing.B, keyOffset int) twoLevelBloomTo
 		}
 	}
 	return twoLevelBloomTombstoneState{
-		keys: keys, readers: readers, levelSlices: levelSlices, indexFunc: indexFunc}
+		keys: keys, readers: readers, levelSlices: levelSlices, indexFunc: indexFunc,
+	}
 }
 
 // BenchmarkIteratorSeqSeekPrefixGENotFound exercises the case of SeekPrefixGE
@@ -2566,7 +2567,6 @@ func BenchmarkIterator_RangeKeyMasking(b *testing.B) {
 			mem.ResetToSyncedState()
 		})
 	}
-
 }
 
 func BenchmarkIteratorScan(b *testing.B) {
@@ -2631,7 +2631,8 @@ func BenchmarkIteratorScan(b *testing.B) {
 
 func BenchmarkIteratorScanNextPrefix(b *testing.B) {
 	setupBench := func(
-		b *testing.B, maxKeysPerLevel, versCount, readAmp int, enableValueBlocks bool) *DB {
+		b *testing.B, maxKeysPerLevel, versCount, readAmp int, enableValueBlocks bool,
+	) *DB {
 		keyBuf := make([]byte, readAmp+testkeys.MaxSuffixLen)
 		opts := &Options{
 			FS:                 vfs.NewMem(),
@@ -2687,7 +2688,8 @@ func BenchmarkIteratorScanNextPrefix(b *testing.B) {
 									d := setupBench(b, keysPerLevel, versionCount, readAmp, enableValueBlocks)
 									defer func() { require.NoError(b, d.Close()) }()
 									for _, keyTypes := range []IterKeyType{
-										IterKeyTypePointsOnly, IterKeyTypePointsAndRanges} {
+										IterKeyTypePointsOnly, IterKeyTypePointsAndRanges,
+									} {
 										b.Run(fmt.Sprintf("key-types=%s", keyTypes), func(b *testing.B) {
 											iterOpts := IterOptions{KeyTypes: keyTypes}
 											iter, _ := d.NewIter(&iterOpts)
@@ -2775,8 +2777,8 @@ func BenchmarkCombinedIteratorSeek(b *testing.B) {
 func BenchmarkCombinedIteratorSeek_Bounded(b *testing.B) {
 	d, keys := buildFragmentedRangeKey(b, uint64(1658872515083979000))
 
-	var lower = len(keys) / 2
-	var upper = len(keys)/2 + len(keys)/20 // 5%
+	lower := len(keys) / 2
+	upper := len(keys)/2 + len(keys)/20 // 5%
 	iterOpts := IterOptions{
 		KeyTypes:   IterKeyTypePointsAndRanges,
 		LowerBound: keys[lower],
@@ -2801,8 +2803,8 @@ func BenchmarkCombinedIteratorSeek_Bounded(b *testing.B) {
 func BenchmarkCombinedIteratorSeekPrefix(b *testing.B) {
 	d, keys := buildFragmentedRangeKey(b, uint64(1658872515083979000))
 
-	var lower = len(keys) / 2
-	var upper = len(keys)/2 + len(keys)/20 // 5%
+	lower := len(keys) / 2
+	upper := len(keys)/2 + len(keys)/20 // 5%
 	iterOpts := IterOptions{
 		KeyTypes: IterKeyTypePointsAndRanges,
 	}

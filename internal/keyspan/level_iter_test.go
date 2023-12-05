@@ -395,7 +395,8 @@ func TestLevelIter(t *testing.T) {
 					pointKeys = append(pointKeys, ikey)
 					if ikey.Kind() == base.InternalKeyKindRangeDelete {
 						currentRangeDels = append(currentRangeDels, Span{
-							Start: ikey.UserKey, End: []byte(key[j+1:]), Keys: []Key{{Trailer: ikey.Trailer}}})
+							Start: ikey.UserKey, End: []byte(key[j+1:]), Keys: []Key{{Trailer: ikey.Trailer}},
+						})
 					}
 					continue
 				}

@@ -66,7 +66,6 @@ func optsFromArgs(td *datadriven.TestData, writerOpts *WriterOptions) error {
 func runBuildCmd(
 	td *datadriven.TestData, writerOpts *WriterOptions, cacheSize int,
 ) (*WriterMetadata, *Reader, error) {
-
 	f0 := &memFile{}
 	if err := optsFromArgs(td, writerOpts); err != nil {
 		return nil, nil, err

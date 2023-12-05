@@ -34,11 +34,9 @@ type Arena struct {
 
 const nodeAlignment = 4
 
-var (
-	// ErrArenaFull indicates that the arena is full and cannot perform any more
-	// allocations.
-	ErrArenaFull = errors.New("allocation failed because arena is full")
-)
+// ErrArenaFull indicates that the arena is full and cannot perform any more
+// allocations.
+var ErrArenaFull = errors.New("allocation failed because arena is full")
 
 // NewArena allocates a new arena using the specified buffer as the backing
 // store.

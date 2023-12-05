@@ -146,7 +146,8 @@ func NewExternalIterWithContext(
 		externalReaders: readers,
 		newIters: func(
 			ctx context.Context, f *manifest.FileMetadata, opts *IterOptions,
-			internalOpts internalIterOpts) (internalIterator, keyspan.FragmentIterator, error) {
+			internalOpts internalIterOpts,
+		) (internalIterator, keyspan.FragmentIterator, error) {
 			// NB: External iterators are currently constructed without any
 			// `levelIters`. newIters should never be called. When we support
 			// organizing multiple non-overlapping files into a single level

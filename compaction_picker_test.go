@@ -1023,7 +1023,6 @@ func TestPickedCompactionSetupInputs(t *testing.T) {
 					}
 					if pc.startLevel.level == -1 {
 						pc.startLevel.level = level
-
 					} else if pc.outputLevel.level == -1 {
 						if pc.startLevel.level >= level {
 							return fmt.Sprintf("startLevel=%d >= outputLevel=%d\n", pc.startLevel.level, level)

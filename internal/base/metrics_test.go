@@ -75,5 +75,4 @@ func TestGaugeSampleMetricSubtract(t *testing.T) {
 
 	require.Equal(t, int64(20), g1.sampleSum)
 	require.Equal(t, int64(2), g1.count)
-
 }

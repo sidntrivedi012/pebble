@@ -97,9 +97,7 @@ func (ins *Inserter) Add(list *Skiplist, key base.InternalKey, value []byte) err
 	return list.addInternal(key, value, ins)
 }
 
-var (
-	probabilities [maxHeight]uint32
-)
+var probabilities [maxHeight]uint32
 
 func init() {
 	// Precompute the skiplist probabilities so that only a single random number
