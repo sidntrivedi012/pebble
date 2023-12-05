@@ -226,7 +226,6 @@ func TestLatestRefCounting(t *testing.T) {
 
 	// Make sure that the backing file is added to the obsolete tables list.
 	require.Equal(t, 1, len(d.mu.versions.obsoleteTables))
-
 }
 
 // TODO(bananabrick): Convert TestLatestRefCounting and this test into a single

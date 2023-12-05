@@ -132,7 +132,8 @@ func TestSharedCacheRandomized(t *testing.T) {
 
 	helper := func(
 		blockSize int,
-		shardingBlockSize int64) func(t *testing.T) {
+		shardingBlockSize int64,
+	) func(t *testing.T) {
 		return func(t *testing.T) {
 			for _, concurrentReads := range []bool{false, true} {
 				t.Run(fmt.Sprintf("concurrentReads=%v", concurrentReads), func(t *testing.T) {

@@ -554,8 +554,7 @@ func (w *valueBlockWriter) compressAndFlush() {
 	blockType := noCompressionBlockType
 	b := w.buf
 	if w.compression != NoCompression {
-		blockType, w.compressedBuf.b =
-			compressBlock(w.compression, w.buf.b, w.compressedBuf.b[:cap(w.compressedBuf.b)])
+		blockType, w.compressedBuf.b = compressBlock(w.compression, w.buf.b, w.compressedBuf.b[:cap(w.compressedBuf.b)])
 		if len(w.compressedBuf.b) < len(w.buf.b)-len(w.buf.b)/8 {
 			b = w.compressedBuf
 		} else {
@@ -645,8 +644,7 @@ func (w *valueBlockWriter) finish(
 func (w *valueBlockWriter) writeValueBlocksIndex(
 	writer io.Writer, h valueBlocksIndexHandle,
 ) (valueBlocksIndexHandle, error) {
-	blockLen :=
-		int(h.blockNumByteLength+h.blockOffsetByteLength+h.blockLengthByteLength) * len(w.blocks)
+	blockLen := int(h.blockNumByteLength+h.blockOffsetByteLength+h.blockLengthByteLength) * len(w.blocks)
 	h.h.Length = uint64(blockLen)
 	blockLen += blockTrailerLen
 	var buf []byte
@@ -923,8 +921,7 @@ func (r *valueBlockReader) getValueInternal(handle []byte, valLen int32) (val []
 }
 
 func (r *valueBlockReader) getBlockHandle(blockNum uint32) (BlockHandle, error) {
-	indexEntryLen :=
-		int(r.vbih.blockNumByteLength + r.vbih.blockOffsetByteLength + r.vbih.blockLengthByteLength)
+	indexEntryLen := int(r.vbih.blockNumByteLength + r.vbih.blockOffsetByteLength + r.vbih.blockLengthByteLength)
 	offsetInIndex := indexEntryLen * int(blockNum)
 	if len(r.vbiBlock) < offsetInIndex+indexEntryLen {
 		return BlockHandle{}, errors.Errorf(

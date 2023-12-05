@@ -1386,5 +1386,4 @@ func TestOpenRatchetsNextFileNum(t *testing.T) {
 	require.NoError(t, d.Set([]byte("bar2"), []byte("value"), nil))
 	require.NoError(t, d.Flush())
 	require.NoError(t, d.Compact([]byte("a"), []byte("z"), false))
-
 }

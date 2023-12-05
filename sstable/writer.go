@@ -937,8 +937,7 @@ func (w *Writer) addPoint(key InternalKey, value []byte, forceObsolete bool) err
 		// preceding key was in a different block, then the blockWriter will
 		// ignore this maxSharedKeyLen.
 		maxSharedKeyLen = w.lastPointKeyInfo.prefixLen
-		setHasSameKeyPrefix, writeToValueBlock, isObsolete, err =
-			w.makeAddPointDecisionV3(key, len(value))
+		setHasSameKeyPrefix, writeToValueBlock, isObsolete, err = w.makeAddPointDecisionV3(key, len(value))
 		addPrefixToValueStoredWithKey = base.TrailerKind(key.Trailer) == InternalKeyKindSet
 	} else {
 		err = w.makeAddPointDecisionV2(key)
@@ -1473,7 +1472,6 @@ func (w *Writer) maybeFlush(key InternalKey, valueLen int) error {
 	}
 
 	err := w.flush(key)
-
 	if err != nil {
 		w.err = err
 		return err

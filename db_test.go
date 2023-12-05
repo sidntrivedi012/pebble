@@ -780,7 +780,6 @@ func TestIterLeakSharedCache(t *testing.T) {
 							}
 						}
 					}
-
 				})
 			}
 		})

@@ -483,8 +483,7 @@ func TestVersionEditApply(t *testing.T) {
 								v.Levels[level].insert(meta)
 								meta.LatestRef()
 							} else {
-								ve.NewFiles =
-									append(ve.NewFiles, NewFileEntry{Level: level, Meta: meta})
+								ve.NewFiles = append(ve.NewFiles, NewFileEntry{Level: level, Meta: meta})
 							}
 						} else {
 							fileNum, err := strconv.Atoi(data)

@@ -101,6 +101,7 @@ func (s intervalKeySorter) Len() int { return len(s.keys) }
 func (s intervalKeySorter) Less(i, j int) bool {
 	return intervalKeyCompare(s.cmp, s.keys[i].intervalKey, s.keys[j].intervalKey) < 0
 }
+
 func (s intervalKeySorter) Swap(i, j int) {
 	s.keys[i], s.keys[j] = s.keys[j], s.keys[i]
 }
@@ -1207,6 +1208,7 @@ func (is intervalSorterByDecreasingScore) Len() int { return len(is) }
 func (is intervalSorterByDecreasingScore) Less(i, j int) bool {
 	return is[i].score > is[j].score
 }
+
 func (is intervalSorterByDecreasingScore) Swap(i, j int) {
 	is[i], is[j] = is[j], is[i]
 }

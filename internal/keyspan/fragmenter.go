@@ -21,6 +21,7 @@ func (v *spansByStartKey) Len() int { return len(v.buf) }
 func (v *spansByStartKey) Less(i, j int) bool {
 	return v.cmp(v.buf[i].Start, v.buf[j].Start) < 0
 }
+
 func (v *spansByStartKey) Swap(i, j int) {
 	v.buf[i], v.buf[j] = v.buf[j], v.buf[i]
 }
@@ -34,6 +35,7 @@ func (v *spansByEndKey) Len() int { return len(v.buf) }
 func (v *spansByEndKey) Less(i, j int) bool {
 	return v.cmp(v.buf[i].End, v.buf[j].End) < 0
 }
+
 func (v *spansByEndKey) Swap(i, j int) {
 	v.buf[i], v.buf[j] = v.buf[j], v.buf[i]
 }

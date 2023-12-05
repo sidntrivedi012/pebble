@@ -26,16 +26,18 @@ const numLevels = manifest.NumLevels
 const manifestMarkerName = `manifest`
 
 // Provide type aliases for the various manifest structs.
-type bulkVersionEdit = manifest.BulkVersionEdit
-type deletedFileEntry = manifest.DeletedFileEntry
-type fileMetadata = manifest.FileMetadata
-type physicalMeta = manifest.PhysicalFileMeta
-type virtualMeta = manifest.VirtualFileMeta
-type fileBacking = manifest.FileBacking
-type newFileEntry = manifest.NewFileEntry
-type version = manifest.Version
-type versionEdit = manifest.VersionEdit
-type versionList = manifest.VersionList
+type (
+	bulkVersionEdit  = manifest.BulkVersionEdit
+	deletedFileEntry = manifest.DeletedFileEntry
+	fileMetadata     = manifest.FileMetadata
+	physicalMeta     = manifest.PhysicalFileMeta
+	virtualMeta      = manifest.VirtualFileMeta
+	fileBacking      = manifest.FileBacking
+	newFileEntry     = manifest.NewFileEntry
+	version          = manifest.Version
+	versionEdit      = manifest.VersionEdit
+	versionList      = manifest.VersionList
+)
 
 // versionSet manages a collection of immutable versions, and manages the
 // creation of a new version from the most recent version. A new version is

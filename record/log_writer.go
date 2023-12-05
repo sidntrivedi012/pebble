@@ -19,8 +19,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-var walSyncLabels = pprof.Labels("pebble", "wal-sync")
-var errClosedWriter = errors.New("pebble/record: closed LogWriter")
+var (
+	walSyncLabels   = pprof.Labels("pebble", "wal-sync")
+	errClosedWriter = errors.New("pebble/record: closed LogWriter")
+)
 
 type block struct {
 	// buf[:written] has already been filled with fragments. Updated atomically.

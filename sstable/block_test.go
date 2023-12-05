@@ -54,7 +54,8 @@ func TestBlockWriterWithPrefix(t *testing.T) {
 		value []byte,
 		addValuePrefix bool,
 		valuePrefix valuePrefix,
-		setHasSameKeyPrefix bool) {
+		setHasSameKeyPrefix bool,
+	) {
 		w.addWithOptionalValuePrefix(
 			key, false, value, len(key.UserKey), addValuePrefix, valuePrefix, setHasSameKeyPrefix)
 	}
@@ -157,7 +158,7 @@ func TestBlockIter(t *testing.T) {
 			"\x02\x05\x00ricot" +
 			"\x00\x06\x00banana" +
 			"\x00\x00\x00\x00\x01\x00\x00\x00"))
-	var testcases = []struct {
+	testcases := []struct {
 		index int
 		key   string
 	}{

@@ -252,7 +252,8 @@ func TestMemTable1000Entries(t *testing.T) {
 func TestMemTableIter(t *testing.T) {
 	var mem *memTable
 	for _, testdata := range []string{
-		"testdata/internal_iter_next", "testdata/internal_iter_bounds"} {
+		"testdata/internal_iter_next", "testdata/internal_iter_bounds",
+	} {
 		datadriven.RunTest(t, testdata, func(t *testing.T, d *datadriven.TestData) string {
 			switch d.Cmd {
 			case "define":

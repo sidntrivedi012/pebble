@@ -16,12 +16,16 @@ import (
 	"github.com/cockroachdb/pebble/internal/intern"
 )
 
-const propertiesBlockRestartInterval = math.MaxInt32
-const propGlobalSeqnumName = "rocksdb.external_sst_file.global_seqno"
+const (
+	propertiesBlockRestartInterval = math.MaxInt32
+	propGlobalSeqnumName           = "rocksdb.external_sst_file.global_seqno"
+)
 
-var propTagMap = make(map[string]reflect.StructField)
-var propBoolTrue = []byte{'1'}
-var propBoolFalse = []byte{'0'}
+var (
+	propTagMap    = make(map[string]reflect.StructField)
+	propBoolTrue  = []byte{'1'}
+	propBoolFalse = []byte{'0'}
+)
 
 var propOffsetTagMap = make(map[uintptr]string)
 

@@ -18,8 +18,10 @@ import (
 	"github.com/cockroachdb/pebble/metamorphic"
 )
 
-var runOnceFlags = metaflags.InitRunOnceFlags()
-var _ = flag.String("test.run", "", `ignored; used for compatibility with TestMeta`)
+var (
+	runOnceFlags = metaflags.InitRunOnceFlags()
+	_            = flag.String("test.run", "", `ignored; used for compatibility with TestMeta`)
+)
 
 func main() {
 	flag.Parse()

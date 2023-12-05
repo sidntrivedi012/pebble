@@ -27,8 +27,10 @@ import (
 	"github.com/cockroachdb/pebble/objstorage/objstorageprovider/objiotracing"
 )
 
-var errCorruptIndexEntry = base.CorruptionErrorf("pebble/table: corrupt index entry")
-var errReaderClosed = errors.New("pebble/table: reader is closed")
+var (
+	errCorruptIndexEntry = base.CorruptionErrorf("pebble/table: corrupt index entry")
+	errReaderClosed      = errors.New("pebble/table: reader is closed")
+)
 
 // decodeBlockHandle returns the block handle encoded at the start of src, as
 // well as the number of bytes it occupies. It returns zero if given invalid

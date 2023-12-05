@@ -29,7 +29,6 @@ type readCompactionQueue struct {
 // combine should be used to combine an older queue with a newer
 // queue.
 func (qu *readCompactionQueue) combine(newQu *readCompactionQueue, cmp base.Compare) {
-
 	for i := 0; i < newQu.size; i++ {
 		qu.add(newQu.queue[i], cmp)
 	}

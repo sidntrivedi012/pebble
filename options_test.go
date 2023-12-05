@@ -263,26 +263,30 @@ func TestOptionsValidate(t *testing.T) {
 		expected string
 	}{
 		{``, ``},
-		{`
+		{
+			`
 [Options]
   l0_compaction_concurrency=0
 `,
 			`L0CompactionConcurrency \(0\) must be >= 1`,
 		},
-		{`
+		{
+			`
 [Options]
   l0_compaction_threshold=2
   l0_stop_writes_threshold=1
 `,
 			`L0StopWritesThreshold .* must be >= L0CompactionThreshold .*`,
 		},
-		{`
+		{
+			`
 [Options]
   mem_table_size=4294967296
 `,
 			`MemTableSize \(4\.0GB\) must be < [2|4]\.0GB`,
 		},
-		{`
+		{
+			`
 [Options]
   mem_table_stop_writes_threshold=1
 `,

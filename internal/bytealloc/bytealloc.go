@@ -25,8 +25,10 @@ import "github.com/cockroachdb/pebble/internal/rawalloc"
 // of room up to a maximum size (chunkAllocMaxSize).
 type A []byte
 
-const chunkAllocMinSize = 512
-const chunkAllocMaxSize = 512 << 10 // 512 KB
+const (
+	chunkAllocMinSize = 512
+	chunkAllocMaxSize = 512 << 10 // 512 KB
+)
 
 func (a A) reserve(n int) A {
 	allocSize := cap(a) * 2

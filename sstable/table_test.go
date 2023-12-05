@@ -208,7 +208,7 @@ func check(f vfs.File, comparer *Comparer, fp FilterPolicy) error {
 	}
 
 	// Check that the number of keys >= a given start key matches the expected number.
-	var countTests = []struct {
+	countTests := []struct {
 		count int
 		start string
 	}{
@@ -434,6 +434,7 @@ func TestReaderNoCompression(t *testing.T)      { testReader(t, "h.no-compressio
 func TestReaderBlockBloomIgnored(t *testing.T) {
 	testReader(t, "h.block-bloom.no-compression.sst", nil, nil)
 }
+
 func TestReaderTableBloomIgnored(t *testing.T) {
 	testReader(t, "h.table-bloom.no-compression.sst", nil, nil)
 }
@@ -829,7 +830,6 @@ func (errorPropCollector) Name() string {
 }
 
 func TestTablePropertyCollectorErrors(t *testing.T) {
-
 	var testcases map[string]func(w *Writer) error = map[string]func(w *Writer) error{
 		"add a#0,1 failed": func(w *Writer) error {
 			return w.Set([]byte("a"), []byte("b"))

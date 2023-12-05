@@ -153,22 +153,21 @@ func TestMergingIterCornerCases(t *testing.T) {
 	}()
 
 	var fileNum base.FileNum
-	newIters :=
-		func(_ context.Context, file *manifest.FileMetadata, opts *IterOptions, iio internalIterOpts,
-		) (internalIterator, keyspan.FragmentIterator, error) {
-			r := readers[file.FileNum]
-			rangeDelIter, err := r.NewRawRangeDelIter()
-			if err != nil {
-				return nil, nil, err
-			}
-			iter, err := r.NewIterWithBlockPropertyFilters(
-				opts.GetLowerBound(), opts.GetUpperBound(), nil, true /* useFilterBlock */, iio.stats,
-				sstable.TrivialReaderProvider{Reader: r})
-			if err != nil {
-				return nil, nil, err
-			}
-			return iter, rangeDelIter, nil
+	newIters := func(_ context.Context, file *manifest.FileMetadata, opts *IterOptions, iio internalIterOpts,
+	) (internalIterator, keyspan.FragmentIterator, error) {
+		r := readers[file.FileNum]
+		rangeDelIter, err := r.NewRawRangeDelIter()
+		if err != nil {
+			return nil, nil, err
 		}
+		iter, err := r.NewIterWithBlockPropertyFilters(
+			opts.GetLowerBound(), opts.GetUpperBound(), nil, true /* useFilterBlock */, iio.stats,
+			sstable.TrivialReaderProvider{Reader: r})
+		if err != nil {
+			return nil, nil, err
+		}
+		return iter, rangeDelIter, nil
+	}
 
 	datadriven.RunTest(t, "testdata/merging_iter", func(t *testing.T, d *datadriven.TestData) string {
 		switch d.Cmd {

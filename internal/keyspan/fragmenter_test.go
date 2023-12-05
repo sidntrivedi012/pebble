@@ -112,7 +112,7 @@ func TestFragmenter(t *testing.T) {
 	cmp := base.DefaultComparer.Compare
 	fmtKey := base.DefaultComparer.FormatKey
 
-	var getRe = regexp.MustCompile(`(\w+)#(\d+)`)
+	getRe := regexp.MustCompile(`(\w+)#(\d+)`)
 
 	parseGet := func(t *testing.T, s string) (string, int) {
 		m := getRe.FindStringSubmatch(s)

@@ -94,19 +94,18 @@ func TestCheckLevelsCornerCases(t *testing.T) {
 	}()
 
 	var fileNum FileNum
-	newIters :=
-		func(_ context.Context, file *manifest.FileMetadata, _ *IterOptions, _ internalIterOpts) (internalIterator, keyspan.FragmentIterator, error) {
-			r := readers[file.FileNum]
-			rangeDelIter, err := r.NewRawRangeDelIter()
-			if err != nil {
-				return nil, nil, err
-			}
-			iter, err := r.NewIter(nil /* lower */, nil /* upper */)
-			if err != nil {
-				return nil, nil, err
-			}
-			return iter, rangeDelIter, nil
+	newIters := func(_ context.Context, file *manifest.FileMetadata, _ *IterOptions, _ internalIterOpts) (internalIterator, keyspan.FragmentIterator, error) {
+		r := readers[file.FileNum]
+		rangeDelIter, err := r.NewRawRangeDelIter()
+		if err != nil {
+			return nil, nil, err
 		}
+		iter, err := r.NewIter(nil /* lower */, nil /* upper */)
+		if err != nil {
+			return nil, nil, err
+		}
+		return iter, rangeDelIter, nil
+	}
 
 	fm := &failMerger{}
 	defer require.Equal(t, 0, fm.closeCount)

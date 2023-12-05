@@ -198,7 +198,7 @@ func testBatch(t *testing.T, size int) {
 }
 
 func TestBatchPreAlloc(t *testing.T) {
-	var cases = []struct {
+	cases := []struct {
 		size int
 		exp  int
 	}{
@@ -864,7 +864,8 @@ func TestBatchIter(t *testing.T) {
 
 	for _, method := range []string{"build", "apply"} {
 		for _, testdata := range []string{
-			"testdata/internal_iter_next", "testdata/internal_iter_bounds"} {
+			"testdata/internal_iter_next", "testdata/internal_iter_bounds",
+		} {
 			t.Run(method, func(t *testing.T) {
 				datadriven.RunTest(t, testdata, func(t *testing.T, d *datadriven.TestData) string {
 					switch d.Cmd {

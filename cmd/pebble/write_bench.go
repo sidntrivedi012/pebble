@@ -171,7 +171,6 @@ func runWriteBenchmark(_ *cobra.Command, args []string) error {
 	desiredRate := writeBenchConfig.rateStart
 	incBase := writeBenchConfig.incBase
 	weights, err := ycsbParseWorkload(workload)
-
 	if err != nil {
 		return err
 	}

@@ -413,7 +413,8 @@ func TestMetricsWithSync(t *testing.T) {
 	f.syncWG.Add(1)
 	writeTo := &prometheusgo.Metric{}
 	syncLatencyMicros := prometheus.NewHistogram(prometheus.HistogramOpts{
-		Buckets: []float64{0,
+		Buckets: []float64{
+			0,
 			float64(time.Millisecond),
 			float64(2 * time.Millisecond),
 			float64(3 * time.Millisecond),
@@ -423,7 +424,8 @@ func TestMetricsWithSync(t *testing.T) {
 			float64(7 * time.Millisecond),
 			float64(8 * time.Millisecond),
 			float64(9 * time.Millisecond),
-			float64(10 * time.Millisecond)},
+			float64(10 * time.Millisecond),
+		},
 	})
 
 	w := NewLogWriter(f, 0, LogWriterConfig{

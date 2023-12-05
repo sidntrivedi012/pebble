@@ -222,7 +222,6 @@ type enospcMockFile struct {
 }
 
 func (f *enospcMockFile) Write(b []byte) (int, error) {
-
 	if err := f.fs.maybeENOSPC(); err != nil {
 		n := len(b)
 		if f.fs.bytesWritten < n {

@@ -516,7 +516,6 @@ func (g *generator) batchCommit() {
 		batchID: batchID,
 	})
 	g.add(&closeOp{objID: batchID, derivedDBID: dbID})
-
 }
 
 func (g *generator) dbClose() {
